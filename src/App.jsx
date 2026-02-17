@@ -115,16 +115,16 @@ const COMPETITORS_NEUR = [
 // Verordnerkonzentration nach AD-Gebiet (PharmaScope Sales Rep Regions, nicht Einzelarzt)
 const CONC_CARD = [
   {seg:"Top 2 KV-Bezirke",trxShare:37.5,cumTrx:37.5},
-  {seg:"KV-Bezirke 3\u20135",trxShare:28.2,cumTrx:65.7},
-  {seg:"KV-Bezirke 6\u201310",trxShare:22.1,cumTrx:87.8},
-  {seg:"KV-Bezirke 11\u201317",trxShare:12.2,cumTrx:100.0},
+  {seg:"KV-Bezirke 3–5",trxShare:28.2,cumTrx:65.7},
+  {seg:"KV-Bezirke 6–10",trxShare:22.1,cumTrx:87.8},
+  {seg:"KV-Bezirke 11–17",trxShare:12.2,cumTrx:100.0},
 ];
 
 const CONC_NEUR = [
   {seg:"Top 2 KV-Bezirke",trxShare:32.8,cumTrx:32.8},
-  {seg:"KV-Bezirke 3\u20135",trxShare:30.5,cumTrx:63.3},
-  {seg:"KV-Bezirke 6\u201310",trxShare:23.7,cumTrx:87.0},
-  {seg:"KV-Bezirke 11\u201317",trxShare:13.0,cumTrx:100.0},
+  {seg:"KV-Bezirke 3–5",trxShare:30.5,cumTrx:63.3},
+  {seg:"KV-Bezirke 6–10",trxShare:23.7,cumTrx:87.0},
+  {seg:"KV-Bezirke 11–17",trxShare:13.0,cumTrx:100.0},
 ];
 
 // ============ LIGHT BUSINESS THEME ============
@@ -211,7 +211,7 @@ function ExecSummary({product}){
       <KPI label="TRx letzter Monat" value={fmt(last?.trx)} sub={"Plan: "+fmt(last?.trxP)} trend={prev?dlt(last?.trx,prev?.trx):null}/>
       <KPI label="Verordnende Ärzte" value={fmt(last?.docs)} sub="letzter Monat"/>
     </div>
-    {!isC&&<Alert color={T.red}><strong style={{color:T.red}}>{"⚠"} Preis-Gap:</strong> AMNOG-Ergebnis "geringer Zusatznutzen" (erwartet: beträchtlich). Erstattungsbetrag €168 statt €220 {"→"} Net Revenue/TRx 23,8% unter Plan. Volumen bei {pct(cumTrx,cumTrxP)} Plan, aber Revenue nur {pct(cumNet,cumNetP)}.</Alert>}
+    {!isC&&<Alert color={T.red}><strong style={{color:T.red}}>⚠ Preis-Gap:</strong> AMNOG-Ergebnis "geringer Zusatznutzen" (erwartet: beträchtlich). Erstattungsbetrag €168 statt €220 → Net Revenue/TRx 23,8% unter Plan. Volumen bei {pct(cumTrx,cumTrxP)} Plan, aber Revenue nur {pct(cumNet,cumNetP)}.</Alert>}
     <div style={{display:"flex",gap:14,marginTop:18,flexWrap:"wrap"}}>
       <Card title="TRx-Verlauf vs. Forecast-Korridor" sub="Actual vs. Base / Upside / Downside" flex={2}>
         <ResponsiveContainer width="100%" height={280}>
@@ -278,7 +278,7 @@ function AdoptionPage({product}){
 
   const nrxChart=uptake.map(d=>({name:sM(d.m),"NRx Ist":d.nrx,"NRx Plan":d.nrxP,"RRx Ist":d.rrx,"RRx Plan":d.rrxP}));
   const verordnerChart=uptake.map(d=>({name:sM(d.m),"Verordner Ist":d.verordner,"Verordner Plan":d.verordnerP}));
-  const persistChart=uptake.filter(d=>d.persist>0).map(d=>({name:sM(d.m),"MPR \u226580%":d.persist,benchmark:isC?78:70}));
+  const persistChart=uptake.filter(d=>d.persist>0).map(d=>({name:sM(d.m),"MPR ≥80%":d.persist,benchmark:isC?78:70}));
   const mixChart=uptake.map(d=>{const t=d.nrx+d.rrx;return{name:sM(d.m),"NRx %":t>0?parseFloat((d.nrx/t*100).toFixed(1)):100,"RRx %":t>0?parseFloat((d.rrx/t*100).toFixed(1)):0};});
 
   const compKeys=isC
@@ -293,7 +293,7 @@ function AdoptionPage({product}){
       <KPI label="Repeat-Anteil (RRx/TRx)" value={rrxRatio+"%"} sub={isC?"Ziel >75% ab M8":"Ziel >60% ab M4"}/>
     </div>
 
-    {!isC&&<Alert color={T.red}><strong style={{color:T.red}}>{"\u26a0"} Verordner-Gap:</strong> Nur {last?.verordner} von {last?.verordnerP} geplanten unique Verordnern erreicht ({pct(last?.verordner,last?.verordnerP)}). AMNOG-Ergebnis {"\u201e"}geringer Zusatznutzen{"\u201c"} reduziert Bereitschaft zur Erstverordnung. Persistenz mit {last?.persist}% unter Benchmark ({isC?"78":"70"}%).</Alert>}
+    {!isC&&<Alert color={T.red}><strong style={{color:T.red}}>⚠ Verordner-Gap:</strong> Nur {last?.verordner} von {last?.verordnerP} geplanten unique Verordnern erreicht ({pct(last?.verordner,last?.verordnerP)}). AMNOG-Ergebnis „geringer Zusatznutzen" reduziert Bereitschaft zur Erstverordnung. Persistenz mit {last?.persist}% unter Benchmark ({isC?"78":"70"}%).</Alert>}
 
     <div style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:14}}>
       <Card title="Verordnungsdynamik: NRx vs. RRx" sub={name+": Neue Patienten vs. Wiederholungsverordnungen (monatlich)"} flex={2}>
@@ -310,7 +310,7 @@ function AdoptionPage({product}){
           </ComposedChart>
         </ResponsiveContainer>
         <div style={{display:"flex",gap:18,marginTop:8,flexWrap:"wrap"}}>
-          {[{l:"NRx (Neuverordnung)",c:pc,d:"Erstrezept f\u00fcr Wirkstoff"},{l:"RRx (Repeat)",c:T.green,d:"Folgeverordnung bestehender Patient"}].map((leg,i)=>(
+          {[{l:"NRx (Neuverordnung)",c:pc,d:"Erstrezept für Wirkstoff"},{l:"RRx (Repeat)",c:T.green,d:"Folgeverordnung bestehender Patient"}].map((leg,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:5,fontSize:11}}>
               <span style={{width:10,height:3,background:leg.c,borderRadius:2,display:"inline-block"}}/>
               <span style={{fontWeight:600,color:T.text}}>{leg.l}</span>
@@ -318,8 +318,8 @@ function AdoptionPage({product}){
             </div>
           ))}
         </div>
-        {isC?<Alert color={T.green}>Gesunde Launch-Dynamik: NRx stabil bei ~420/M, RRx-Aufbau {"\u00fc"}berlinear. Repeat-Anteil {rrxRatio}% zeigt wachsende Patientenbasis mit Therapietreue.</Alert>
-        :<Alert color={T.yellow}>NRx-Zufluss schwankend (Peak Okt durch Launch-Push, Normalisierung ab Nov). RRx-Aufbau unter Erwartung {"\u2013"} Persistenz-Problem oder Dosisfindungsabbrecher pr{"\u00fc"}fen.</Alert>}
+        {isC?<Alert color={T.green}>Gesunde Launch-Dynamik: NRx stabil bei ~420/M, RRx-Aufbau überlinear. Repeat-Anteil {rrxRatio}% zeigt wachsende Patientenbasis mit Therapietreue.</Alert>
+        :<Alert color={T.yellow}>NRx-Zufluss schwankend (Peak Okt durch Launch-Push, Normalisierung ab Nov). RRx-Aufbau unter Erwartung – Persistenz-Problem oder Dosisfindungsabbrecher prüfen.</Alert>}
       </Card>
 
       <Card title="NRx/RRx-Mix Entwicklung" sub="Reifung der Patientenbasis" flex={1}>
@@ -336,11 +336,11 @@ function AdoptionPage({product}){
         <div style={{marginTop:10,padding:10,background:T.surface2,borderRadius:6}}>
           <div style={{fontSize:11,fontWeight:600,color:T.text,marginBottom:4}}>Launch-Reife Indikator</div>
           <div style={{fontSize:11,color:T.textMuted,lineHeight:1.6}}>
-            RRx {"\u2265"} 70% des TRx-Mix = Patientenbasis tr{"\u00e4"}gt sich selbst.{" "}
+            RRx ≥ 70% des TRx-Mix = Patientenbasis trägt sich selbst.{" "}
             {name}: RRx-Anteil {rrxRatio}% nach {uptake.length} Monaten.{" "}
             {parseInt(rrxRatio)>=70?<span style={{color:T.green,fontWeight:500}}>Selbsttragende Basis erreicht.</span>
-            :parseInt(rrxRatio)>=50?<span style={{color:T.yellow,fontWeight:500}}>Aufbauphase {"\u2013"} Plan-konform.</span>
-            :<span style={{color:T.red,fontWeight:500}}>Fr{"\u00fc"}hphase {"\u2013"} NRx-Akquise kritisch.</span>}
+            :parseInt(rrxRatio)>=50?<span style={{color:T.yellow,fontWeight:500}}>Aufbauphase – Plan-konform.</span>
+            :<span style={{color:T.red,fontWeight:500}}>Frühphase – NRx-Akquise kritisch.</span>}
           </div>
         </div>
       </Card>
@@ -363,7 +363,7 @@ function AdoptionPage({product}){
         </div>
       </Card>
 
-      <Card title={"Persistenz (MPR \u226580%)"} sub={"Patienten mit ausreichender Therapietreue nach 3 Monaten"} flex={1}>
+      <Card title={"Persistenz (MPR ≥80%)"} sub={"Patienten mit ausreichender Therapietreue nach 3 Monaten"} flex={1}>
         {persistChart.length>0?<ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={persistChart} margin={{top:5,right:10,left:0,bottom:5}}>
             <CartesianGrid strokeDasharray="3 3" stroke={T.grid}/>
@@ -371,12 +371,12 @@ function AdoptionPage({product}){
             <YAxis tick={{fill:T.textMuted,fontSize:11}} unit="%" domain={[50,100]}/>
             <Tooltip content={<Tip/>}/>
             <Line type="monotone" dataKey="benchmark" stroke={T.textDim} strokeDasharray="6 3" strokeWidth={1.5} dot={false} name="Benchmark"/>
-            <Line type="monotone" dataKey={"MPR \u226580%"} stroke={pc} strokeWidth={2.5} dot={{fill:pc,r:4,stroke:"#fff",strokeWidth:2}} name={"MPR \u226580%"}/>
+            <Line type="monotone" dataKey={"MPR ≥80%"} stroke={pc} strokeWidth={2.5} dot={{fill:pc,r:4,stroke:"#fff",strokeWidth:2}} name={"MPR ≥80%"}/>
           </ComposedChart>
         </ResponsiveContainer>
-        :<div style={{height:220,display:"flex",alignItems:"center",justifyContent:"center",color:T.textMuted,fontSize:13}}>Persistenzdaten verf{"\u00fc"}gbar ab Monat 3 nach Launch</div>}
+        :<div style={{height:220,display:"flex",alignItems:"center",justifyContent:"center",color:T.textMuted,fontSize:13}}>Persistenzdaten verfügbar ab Monat 3 nach Launch</div>}
         <div style={{fontSize:11,color:T.textMuted,marginTop:6}}>
-          MPR (Medication Possession Ratio): Anteil der Patienten, die innerhalb von 90 Tagen nach Erstverordnung {"\u2265"}80% der erwarteten Folgeverordnungen einl{"\u00f6"}sen.
+          MPR (Medication Possession Ratio): Anteil der Patienten, die innerhalb von 90 Tagen nach Erstverordnung ≥80% der erwarteten Folgeverordnungen einlösen.
         </div>
       </Card>
     </div>
@@ -394,8 +394,8 @@ function AdoptionPage({product}){
             ))}
           </AreaChart>
         </ResponsiveContainer>
-        {isC?<Alert color={T.accent2}>Cardiozan-Wachstum geht prim{"\u00e4"}r zu Lasten von Forxiga ({"\u2013"}4,5pp) und Jardiance ({"\u2013"}3,3pp). Invokana verliert {"\u2013"}2,7pp {"\u2013"} {"\u00fc"}berproportional zum Ausgangsanteil.</Alert>
-        :<Alert color={T.yellow}>Neurolix gewinnt prim{"\u00e4"}r aus dem Venlafaxin/Duloxetin-Pool (Generika-Switch). Spravato w{"\u00e4"}chst parallel {"\u2013"} komplement{"\u00e4"}re Segmente (oral vs. intranasal).</Alert>}
+        {isC?<Alert color={T.accent2}>Cardiozan-Wachstum geht primär zu Lasten von Forxiga (–4,5pp) und Jardiance (–3,3pp). Invokana verliert –2,7pp – überproportional zum Ausgangsanteil.</Alert>
+        :<Alert color={T.yellow}>Neurolix gewinnt primär aus dem Venlafaxin/Duloxetin-Pool (Generika-Switch). Spravato wächst parallel – komplementäre Segmente (oral vs. intranasal).</Alert>}
       </Card>
 
       <Card title={"TRx-Konzentration nach KV-Bezirk"} sub="Verteilung des Volumens nach KV-Bezirk" flex={1}>
@@ -412,21 +412,21 @@ function AdoptionPage({product}){
             <Line yAxisId="right" type="monotone" dataKey="cumTrx" stroke={T.yellow} strokeWidth={2} dot={{fill:T.yellow,r:3}} name="Kumuliert %"/>
           </ComposedChart>
         </ResponsiveContainer>
-        <Alert color={T.yellow}><strong style={{color:T.yellow}}>Konzentrationsrisiko:</strong> Top 5 KV-Bezirke = {conc.length>=2?conc[1].cumTrx:0}% des Volumens. Regionale Verteilung gem. {"\u00a7"}300 SGB V auf KV-Ebene aggregiert {"\u2013"} Einzel-Arzt-Attribution regulatorisch nicht zul{"\u00e4"}ssig.</Alert>
+        <Alert color={T.yellow}><strong style={{color:T.yellow}}>Konzentrationsrisiko:</strong> Top 5 KV-Bezirke = {conc.length>=2?conc[1].cumTrx:0}% des Volumens. Regionale Verteilung gem. §300 SGB V auf KV-Ebene aggregiert – Einzel-Arzt-Attribution regulatorisch nicht zulässig.</Alert>
       </Card>
     </div>
 
-    <Card title={"Methodik & Datengrenzen"} sub="Transparenz \u00fcber Messbarkeit der Uptake-Metriken im deutschen Markt">
+    <Card title={"Methodik & Datengrenzen"} sub="Transparenz über Messbarkeit der Uptake-Metriken im deutschen Markt">
       <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
         {[
-          {icon:"\u2705",title:"Direkt messbar (Verordnungsdaten)",items:["NRx/RRx (Neuverordnungen vs. Repeats)","Unique Verordner (anonymisiert, kumuliert)","Persistenz / MPR / PDC (Therapietreue)","Marktanteile nach KV-Bezirk","Therapiesequenz & Ko-Medikation"]},
-          {icon:"\u26a0\ufe0f",title:"Bedingt messbar (CRM + Korrelation)",items:["AD-Kontaktrate \u2192 Verordnung (nur auf Gebietsebene)","Verordner-Profil (Fachgruppe, nicht individuell)","Share of Voice vs. Marktanteil (Korrelation)","Ziel\u00e4rzte-Universum (nur CRM, nicht verifiziert)"]},
-          {icon:"\u274c",title:"Nicht direkt messbar in DE",items:["Arzt-individuelles Rx-Tracking (regulat. verboten)","Named-Prescriber Marktanteil (\u2260 USA)","Patient-Arzt-Zuordnung (anonymisiert)","Diagnose-zu-Rx Verkn\u00fcpfung (keine ICD in Rx-Daten)"]},
+          {icon:"✅",title:"Direkt messbar (Verordnungsdaten)",items:["NRx/RRx (Neuverordnungen vs. Repeats)","Unique Verordner (anonymisiert, kumuliert)","Persistenz / MPR / PDC (Therapietreue)","Marktanteile nach KV-Bezirk","Therapiesequenz & Ko-Medikation"]},
+          {icon:"⚠️",title:"Bedingt messbar (CRM + Korrelation)",items:["AD-Kontaktrate → Verordnung (nur auf Gebietsebene)","Verordner-Profil (Fachgruppe, nicht individuell)","Share of Voice vs. Marktanteil (Korrelation)","Zielärzte-Universum (nur CRM, nicht verifiziert)"]},
+          {icon:"❌",title:"Nicht direkt messbar in DE",items:["Arzt-individuelles Rx-Tracking (regulat. verboten)","Named-Prescriber Marktanteil (≠ USA)","Patient-Arzt-Zuordnung (anonymisiert)","Diagnose-zu-Rx Verknüpfung (keine ICD in Rx-Daten)"]},
         ].map((col,i)=>(
           <div key={i} style={{flex:1,minWidth:200,background:T.surface2,borderRadius:6,padding:14}}>
             <div style={{fontSize:13,fontWeight:600,color:T.text,marginBottom:8}}>{col.icon} {col.title}</div>
             {col.items.map((item,j)=>(
-              <div key={j} style={{fontSize:11.5,color:T.textMuted,lineHeight:1.7,paddingLeft:4}}>{"\u2022"} {item}</div>
+              <div key={j} style={{fontSize:11.5,color:T.textMuted,lineHeight:1.7,paddingLeft:4}}>• {item}</div>
             ))}
           </div>
         ))}
@@ -487,7 +487,7 @@ function RegionalPage(){
             <Scatter data={scatter} fill={T.cardiozan}>{scatter.map((d,i)=><Cell key={i} fill={T.cardiozan} r={Math.max(5,d.trx/35)}/>)}</Scatter>
           </ScatterChart>
         </ResponsiveContainer>
-        <div style={{fontSize:11,color:T.textMuted,marginTop:6}}>Berlin: hoher MS (20,7%) bei nur 4 Besuchen {"→"} KOL-Effekt (Charité). SH/HH: viele Besuche, niedriger MS {"→"} Zugangsbarriere?</div>
+        <div style={{fontSize:11,color:T.textMuted,marginTop:6}}>Berlin: hoher MS (20,7%) bei nur 4 Besuchen → KOL-Effekt (Charité). SH/HH: viele Besuche, niedriger MS → Zugangsbarriere?</div>
       </Card>
     </div>
   </div>);
@@ -553,8 +553,8 @@ function FinancialPage({product}){
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        {isC?<Alert color={T.green}>Brutto-Netto-Spread €18,36/Pack (20,5%). Erstattungsbetrag-Verhandlung läuft {"–"} aktuell freie Preisbildung.</Alert>
-        :<Alert color={T.red}><strong style={{color:T.red}}>{"⚠"}</strong> AMNOG-Abschlag €77/Pack (31,4%) statt erwartet €25 (10,2%). Net Rev/TRx 23,8% unter Plan.</Alert>}
+        {isC?<Alert color={T.green}>Brutto-Netto-Spread €18,36/Pack (20,5%). Erstattungsbetrag-Verhandlung läuft – aktuell freie Preisbildung.</Alert>
+        :<Alert color={T.red}><strong style={{color:T.red}}>⚠</strong> AMNOG-Abschlag €77/Pack (31,4%) statt erwartet €25 (10,2%). Net Rev/TRx 23,8% unter Plan.</Alert>}
       </Card>
       <Card title={name+": Revenue-Bridge ("+sM(last?.m||"2025-12")+")"} sub="Dekomposition Plan → Ist" flex={1}>
         <ResponsiveContainer width="100%" height={240}>
@@ -568,8 +568,8 @@ function FinancialPage({product}){
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        {isC?<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>TRx-Rückstand (-{last?.trxP-last?.trx} TRx) treibt Volumen-Effekt. Preis/Mix-Effekt marginal {"→"} Preisstruktur stabil.</div>
-        :<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>Preis-Effekt dominiert Volumen-Effekt {"→"} Preis ist Haupttreiber des Revenue-Gaps.</div>}
+        {isC?<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>TRx-Rückstand (-{last?.trxP-last?.trx} TRx) treibt Volumen-Effekt. Preis/Mix-Effekt marginal → Preisstruktur stabil.</div>
+        :<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>Preis-Effekt dominiert Volumen-Effekt → Preis ist Haupttreiber des Revenue-Gaps.</div>}
       </Card>
     </div>
     <div style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:14}}>
@@ -605,7 +605,7 @@ function FinancialPage({product}){
         </tr></thead>
         <tbody>{sc.map((s,i)=>(
           <tr key={i} style={{borderBottom:"1px solid "+T.border,background:s.hl?T.red+"06":i%2===0?T.surface:T.surface2}}>
-            <TD bold><span style={{color:pc}}>{"●"}</span> {s.s}</TD>
+            <TD bold><span style={{color:pc}}>●</span> {s.s}</TD>
             <TD m>{s.peak}</TD><TD m color={s.be.includes("24+")?T.red:T.text}>{s.be}</TD><TD m bold>{s.npv}</TD>
           </tr>))}</tbody>
       </table>
@@ -794,7 +794,7 @@ function StoryPage({product}){
         <Section title="Produkt & Indikation">
           <strong>Cardiozan</strong> ist ein fiktiver SGLT2-Inhibitor (Sodium-Glucose Co-Transporter 2) zur Behandlung der <strong>Herzinsuffizienz mit reduzierter Ejektionsfraktion (HFrEF)</strong>. Das Produkt tritt in einen etablierten, hochkompetitiven Markt ein, der von Jardiance (Boehringer Ingelheim / Empagliflozin) und Forxiga (AstraZeneca / Dapagliflozin) dominiert wird. Invokana (Janssen / Canagliflozin) spielt eine Nebenrolle.
           <br/><br/>
-          Die SGLT2i-Klasse ist seit dem ESC-Update November 2025 als First-Line-Therapie bei HFrEF best{"ä"}tigt. Der Gesamtmarkt w{"ä"}chst, was einem Late Entrant wie Cardiozan eine zus{"ä"}tzliche Nachfragequelle neben der reinen Verdr{"ä"}ngung bietet.
+          Die SGLT2i-Klasse ist seit dem ESC-Update November 2025 als First-Line-Therapie bei HFrEF bestätigt. Der Gesamtmarkt wächst, was einem Late Entrant wie Cardiozan eine zusätzliche Nachfragequelle neben der reinen Verdrängung bietet.
         </Section>
 
         <Section title="Regulatorischer Verlauf">
@@ -841,7 +841,7 @@ function StoryPage({product}){
         </Section>
       </>) : (<>
         <Section title="Produkt & Indikation">
-          <strong>Neurolix</strong>{" (Wirkstoff: Brivanexin) ist ein fiktives "}<strong>orales Antidepressivum f{"ü"}r therapieresistente Depression (TRD)</strong>{". TRD betrifft ca. 30% der MDD-Patienten und ist ein Segment mit hohem unmet medical need. Der Markt wird dominiert von Generika (Venlafaxin retard, Duloxetin) als Basistherapie und Spravato (Janssen / Esketamin, intranasal) als einzigem patentgeschützten Innovator."}
+          <strong>Neurolix</strong>{" (Wirkstoff: Brivanexin) ist ein fiktives "}<strong>orales Antidepressivum für therapieresistente Depression (TRD)</strong>{". TRD betrifft ca. 30% der MDD-Patienten und ist ein Segment mit hohem unmet medical need. Der Markt wird dominiert von Generika (Venlafaxin retard, Duloxetin) als Basistherapie und Spravato (Janssen / Esketamin, intranasal) als einzigem patentgeschützten Innovator."}
           <br/><br/>
           {"Neurolix positioniert sich als "}<strong>orale Alternative zu Spravato</strong>{" – niedrigere DDD-Kosten (€8,75 vs. €28,50), keine Applikation in Praxis erforderlich, breitere Einsetzbarkeit im ambulanten Setting."}
         </Section>
