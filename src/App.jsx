@@ -989,8 +989,5 @@ export default function App(){
       {page==="competitive"&&<CompetitivePage product={product}/>}
       {page==="whatif"&&<WhatIfPage key={product} product={product}/>}
     </div>
-    <div style={{padding:"14px 24px",textAlign:"center",fontSize:10.5,color:T.textDim,borderTop:"1px solid "+T.border}}>
-      Fiktive Daten – Lesemann Consulting © 2026
-    </div>
   </div>);
 }
