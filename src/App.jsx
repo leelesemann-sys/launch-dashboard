@@ -914,7 +914,7 @@ function StoryPage({product}){
 
     <Card title="Warum dieses Dual-Szenario?" sub="Design-Rationale des Work Samples">
       <div style={{fontSize:13.5,color:T.text,lineHeight:1.85,padding:"4px 0"}}>
-        {"Ein Strategic Portfolio Manager bei Viatris muss "}<strong>beide Situationen gleichzeitig</strong>{" managen können: den Gewinner skalieren und den Problemfall retten. Dieses Dashboard bildet deshalb bewusst zwei kontrastierende Launch-Szenarien ab:"}
+        {"Ein Strategic Portfolio Manager muss "}<strong>beide Situationen gleichzeitig</strong>{" managen können: den Gewinner skalieren und den Problemfall retten. Dieses Dashboard bildet deshalb bewusst zwei kontrastierende Launch-Szenarien ab:"}
         <div style={{display:"flex",gap:14,marginTop:14,flexWrap:"wrap"}}>
           <div style={{flex:1,minWidth:250,background:T.cardiozan+"08",border:"1px solid "+T.cardiozan+"22",borderRadius:8,padding:14}}>
             <div style={{fontWeight:700,color:T.cardiozan,marginBottom:6}}>Cardiozan = Skalierungsaufgabe</div>
@@ -930,7 +930,7 @@ function StoryPage({product}){
           </div>
         </div>
         <div style={{marginTop:14,fontSize:12.5,color:T.textMuted}}>
-          {"Die Märkte (Kardiologie/SGLT2i und ZNS/TRD) wurden gewählt, weil sie strukturell unterschiedlich funktionieren: Kardio ist Massenmarkt mit Leitlinien-getriebener Verordnung und Rabattvertragsdominanz. ZNS ist Specialty mit hoher Arzt-Abhängigkeit, individueller Therapieentscheidung und geringerem Generika-Druck auf den Innovator. Beide sind für Viatris’ Transformation vom „Generic Giant“ zur „Specialty Powerhouse“ strategisch relevant."}
+          {"Die Märkte (Kardiologie/SGLT2i und ZNS/TRD) wurden gewählt, weil sie strukturell unterschiedlich funktionieren: Kardio ist Massenmarkt mit Leitlinien-getriebener Verordnung und Rabattvertragsdominanz. ZNS ist Specialty mit hoher Arzt-Abhängigkeit, individueller Therapieentscheidung und geringerem Generika-Druck auf den Innovator."}
         </div>
       </div>
     </Card>
@@ -990,7 +990,7 @@ export default function App(){
       {page==="whatif"&&<WhatIfPage key={product} product={product}/>}
     </div>
     <div style={{padding:"14px 24px",textAlign:"center",fontSize:10.5,color:T.textDim,borderTop:"1px solid "+T.border}}>
-      Fiktive Daten – Work Sample für Strategic Portfolio Manager Position · Lesemann Consulting © 2026
+      Fiktive Daten – Lesemann Consulting © 2026
     </div>
   </div>);
 }
