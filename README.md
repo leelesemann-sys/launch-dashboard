@@ -68,7 +68,3 @@ Upload the contents of `dist/` to any static hosting service.
 ## License
 
 MIT — see [LICENSE](LICENSE) for details.
-
----
-
-Lesemann Consulting © 2026
