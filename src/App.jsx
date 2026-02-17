@@ -2,14 +2,14 @@ import { useState } from "react";
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ScatterChart, Scatter, ComposedChart } from "recharts";
 
 const MONTHLY = [
-  {m:"2025-05",p:"CARD01",trx:450,trxP:440,gross:40275,net:32014,grossP:39380,netP:31302,docs:60},
-  {m:"2025-06",p:"CARD01",trx:386,trxP:398,gross:34547,net:27461,grossP:35621,netP:28315,docs:30},
-  {m:"2025-07",p:"CARD01",trx:559,trxP:578,gross:50030,net:39768,grossP:51731,netP:41120,docs:30},
-  {m:"2025-08",p:"CARD01",trx:763,trxP:811,gross:68288,net:54281,grossP:72584,netP:57696,docs:31},
-  {m:"2025-09",p:"CARD01",trx:1097,trxP:1090,gross:98182,net:78043,grossP:97555,netP:77545,docs:31},
-  {m:"2025-10",p:"CARD01",trx:1388,trxP:1400,gross:124226,net:98745,grossP:125300,netP:99599,docs:34},
-  {m:"2025-11",p:"CARD01",trx:1654,trxP:1710,gross:148033,net:117669,grossP:153045,netP:121653,docs:34},
-  {m:"2025-12",p:"CARD01",trx:1938,trxP:1994,gross:173451,net:137873,grossP:178463,netP:141857,docs:37},
+  {m:"2025-05",p:"CARD01",trx:450,trxP:440,gross:40275,net:31617,grossP:39380,netP:31310,docs:18},
+  {m:"2025-06",p:"CARD01",trx:386,trxP:398,gross:34547,net:27591,grossP:35621,netP:28393,docs:24},
+  {m:"2025-07",p:"CARD01",trx:559,trxP:578,gross:50030,net:39605,grossP:51731,netP:40992,docs:30},
+  {m:"2025-08",p:"CARD01",trx:763,trxP:811,gross:68288,net:54646,grossP:72584,netP:57970,docs:36},
+  {m:"2025-09",p:"CARD01",trx:1097,trxP:1090,gross:98182,net:77975,grossP:97555,netP:77630,docs:42},
+  {m:"2025-10",p:"CARD01",trx:1388,trxP:1400,gross:124226,net:99298,grossP:125300,netP:99512,docs:48},
+  {m:"2025-11",p:"CARD01",trx:1654,trxP:1710,gross:148033,net:116475,grossP:153045,netP:121000,docs:56},
+  {m:"2025-12",p:"CARD01",trx:1938,trxP:1994,gross:173451,net:138373,grossP:178463,netP:141853,docs:65},
   {m:"2025-09",p:"NEUR01",trx:92,trxP:104,gross:22540,net:14211,grossP:25480,netP:21094,docs:28},
   {m:"2025-10",p:"NEUR01",trx:368,trxP:407,gross:90160,net:56845,grossP:99715,netP:82552,docs:60},
   {m:"2025-11",p:"NEUR01",trx:302,trxP:337,gross:73990,net:46650,grossP:82565,netP:68354,docs:30},
@@ -17,7 +17,7 @@ const MONTHLY = [
 ];
 
 const FORECAST_CARD = [
-  {m:"2025-05",base:183,up:220,down:143},{m:"2025-06",base:381,up:458,down:298},
+  {m:"2025-05",base:380,up:456,down:296},{m:"2025-06",base:381,up:458,down:298},
   {m:"2025-07",base:538,up:645,down:419},{m:"2025-08",base:741,up:889,down:578},
   {m:"2025-09",base:992,up:1190,down:774},{m:"2025-10",base:1284,up:1541,down:1002},
   {m:"2025-11",base:1600,up:1920,down:1248},{m:"2025-12",base:1916,up:2299,down:1494},
@@ -33,27 +33,27 @@ const FORECAST_NEUR = [
 ];
 
 const REGIONS_CARD = [
-  {r:"Bayern",trx:500,trxP:371,net:35570,netP:26382,docs:16,visits:20,ms:25.8},
-  {r:"Nordrhein",trx:363,trxP:259,net:25813,netP:18417,docs:10,visits:12,ms:18.7},
-  {r:"Baden-Württemberg",trx:249,trxP:277,net:17704,netP:19696,docs:7,visits:14,ms:12.8},
-  {r:"Westfalen-Lippe",trx:165,trxP:220,net:11734,netP:15646,docs:5,visits:8,ms:8.5},
-  {r:"Niedersachsen",trx:165,trxP:236,net:11734,netP:16784,docs:5,visits:7,ms:8.5},
-  {r:"Berlin",trx:155,trxP:103,net:11023,netP:7325,docs:3,visits:4,ms:8.0},
-  {r:"Hessen",trx:149,trxP:175,net:10596,netP:12443,docs:5,visits:8,ms:7.7},
-  {r:"Sachsen",trx:82,trxP:126,net:5830,netP:8960,docs:3,visits:4,ms:4.2},
-  {r:"Hamburg",trx:67,trxP:56,net:4764,netP:3982,docs:3,visits:10,ms:3.5},
-  {r:"Schleswig-Holstein",trx:43,trxP:78,net:3058,netP:5547,docs:2,visits:8,ms:2.2},
+  {r:"Bayern",trx:500,trxP:385,net:35570,netP:27389,docs:15,visits:20,ms:21.5},
+  {r:"Nordrhein",trx:363,trxP:256,net:25813,netP:18212,docs:11,visits:12,ms:19.4},
+  {r:"Baden-Württemberg",trx:249,trxP:290,net:17704,netP:20631,docs:8,visits:14,ms:12.3},
+  {r:"Westfalen-Lippe",trx:165,trxP:220,net:11734,netP:15651,docs:5,visits:8,ms:10.5},
+  {r:"Niedersachsen",trx:165,trxP:240,net:11734,netP:17074,docs:5,visits:7,ms:11.0},
+  {r:"Berlin",trx:155,trxP:105,net:11023,netP:7470,docs:3,visits:4,ms:20.7},
+  {r:"Hessen",trx:149,trxP:185,net:10596,netP:13161,docs:6,visits:8,ms:12.4},
+  {r:"Sachsen",trx:82,trxP:170,net:5830,netP:12094,docs:4,visits:4,ms:9.9},
+  {r:"Hamburg",trx:67,trxP:55,net:4764,netP:3913,docs:4,visits:10,ms:17.9},
+  {r:"Schleswig-Holstein",trx:43,trxP:88,net:3058,netP:6260,docs:4,visits:8,ms:8.2},
 ];
 
 const COMPETITORS_CARD = [
-  {m:"2025-05",forxiga:38.3,jardiance:40.7,invokana:7.8,cardiozan:3.0},
-  {m:"2025-06",forxiga:36.4,jardiance:43.4,invokana:7.7,cardiozan:2.6},
-  {m:"2025-07",forxiga:37.9,jardiance:42.3,invokana:7.3,cardiozan:3.7},
-  {m:"2025-08",forxiga:36.4,jardiance:40.9,invokana:6.5,cardiozan:5.1},
-  {m:"2025-09",forxiga:36.4,jardiance:41.9,invokana:6.4,cardiozan:7.3},
-  {m:"2025-10",forxiga:37.3,jardiance:40.3,invokana:5.9,cardiozan:9.3},
-  {m:"2025-11",forxiga:34.7,jardiance:41.0,invokana:6.0,cardiozan:11.0},
-  {m:"2025-12",forxiga:35.7,jardiance:39.3,invokana:5.6,cardiozan:12.9},
+  {m:"2025-05",forxiga:42.7,jardiance:45.3,invokana:8.7,cardiozan:3.3},
+  {m:"2025-06",forxiga:40.4,jardiance:48.2,invokana:8.5,cardiozan:2.9},
+  {m:"2025-07",forxiga:41.6,jardiance:46.4,invokana:8.0,cardiozan:4.0},
+  {m:"2025-08",forxiga:40.9,jardiance:46.0,invokana:7.3,cardiozan:5.8},
+  {m:"2025-09",forxiga:39.6,jardiance:45.5,invokana:7.0,cardiozan:7.9},
+  {m:"2025-10",forxiga:40.2,jardiance:43.4,invokana:6.4,cardiozan:10.0},
+  {m:"2025-11",forxiga:37.4,jardiance:44.2,invokana:6.5,cardiozan:11.9},
+  {m:"2025-12",forxiga:38.2,jardiance:42.0,invokana:6.0,cardiozan:13.8},
 ];
 
 const MILESTONES = [
@@ -82,11 +82,11 @@ const COMP_EVENTS = [
   {date:"Jan 2026",area:"ZNS",type:"Pipeline",who:"Relmada / REL-1017",desc:"Phase III positiv, EMA-Zulassung erwartet 2027"},
 ];
 
-// ============ MARKET UPTAKE DATA ============
+// ============ MARKET UPTAKE DATA (Datenquellen: IQVIA LRx / PharmaScope / CRM) ============
 
 // NRx = Neuverordnungen (neue Patienten), RRx = Wiederholungsverordnungen, TRx = Gesamt
-// Verordner = unique anonymisierte Verordner-IDs (hochgerechnet)
-// Persistenz = Patienten mit MPR >= 80% nach 3 Monaten
+// Verordner = unique anonymisierte Verordner-IDs (LRx, ~80% GKV-Abdeckung, hochgerechnet)
+// Persistenz = Patienten mit MPR >= 80% nach 3 Monaten (LRx longitudinal)
 const UPTAKE_CARD = [
   {m:"2025-05",nrx:450,nrxP:440,rrx:0,rrxP:0,verordner:60,verordnerP:55,persist:0},
   {m:"2025-06",nrx:312,nrxP:320,rrx:74,rrxP:78,verordner:78,verordnerP:80,persist:0},
@@ -112,19 +112,19 @@ const COMPETITORS_NEUR = [
   {m:"2025-12",spravato:20.8,venlafaxin:29.5,duloxetin:27.0,neurolix:4.2,andere:18.5},
 ];
 
-// Verordnerkonzentration nach AD-Gebiet (nicht Einzelarzt)
+// Verordnerkonzentration nach AD-Gebiet (PharmaScope Sales Rep Regions, nicht Einzelarzt)
 const CONC_CARD = [
   {seg:"Top 2 KV-Bezirke",trxShare:37.5,cumTrx:37.5},
-  {seg:"KV-Bezirke 3–5",trxShare:28.2,cumTrx:65.7},
-  {seg:"KV-Bezirke 6–10",trxShare:22.1,cumTrx:87.8},
-  {seg:"KV-Bezirke 11–17",trxShare:12.2,cumTrx:100.0},
+  {seg:"KV-Bezirke 3\u20135",trxShare:28.2,cumTrx:65.7},
+  {seg:"KV-Bezirke 6\u201310",trxShare:22.1,cumTrx:87.8},
+  {seg:"KV-Bezirke 11\u201317",trxShare:12.2,cumTrx:100.0},
 ];
 
 const CONC_NEUR = [
   {seg:"Top 2 KV-Bezirke",trxShare:32.8,cumTrx:32.8},
-  {seg:"KV-Bezirke 3–5",trxShare:30.5,cumTrx:63.3},
-  {seg:"KV-Bezirke 6–10",trxShare:23.7,cumTrx:87.0},
-  {seg:"KV-Bezirke 11–17",trxShare:13.0,cumTrx:100.0},
+  {seg:"KV-Bezirke 3\u20135",trxShare:30.5,cumTrx:63.3},
+  {seg:"KV-Bezirke 6\u201310",trxShare:23.7,cumTrx:87.0},
+  {seg:"KV-Bezirke 11\u201317",trxShare:13.0,cumTrx:100.0},
 ];
 
 // ============ LIGHT BUSINESS THEME ============
@@ -278,7 +278,7 @@ function AdoptionPage({product}){
 
   const nrxChart=uptake.map(d=>({name:sM(d.m),"NRx Ist":d.nrx,"NRx Plan":d.nrxP,"RRx Ist":d.rrx,"RRx Plan":d.rrxP}));
   const verordnerChart=uptake.map(d=>({name:sM(d.m),"Verordner Ist":d.verordner,"Verordner Plan":d.verordnerP}));
-  const persistChart=uptake.filter(d=>d.persist>0).map(d=>({name:sM(d.m),"MPR ≥80%":d.persist,benchmark:isC?78:70}));
+  const persistChart=uptake.filter(d=>d.persist>0).map(d=>({name:sM(d.m),"MPR \u226580%":d.persist,benchmark:isC?78:70}));
   const mixChart=uptake.map(d=>{const t=d.nrx+d.rrx;return{name:sM(d.m),"NRx %":t>0?parseFloat((d.nrx/t*100).toFixed(1)):100,"RRx %":t>0?parseFloat((d.rrx/t*100).toFixed(1)):0};});
 
   const compKeys=isC
@@ -286,14 +286,19 @@ function AdoptionPage({product}){
     :[{k:"spravato",n:"Spravato",c:"#64748b"},{k:"venlafaxin",n:"Venlafaxin",c:"#94a3b8"},{k:"duloxetin",n:"Duloxetin",c:"#a1a1aa"},{k:"neurolix",n:"Neurolix",c:T.neurolix},{k:"andere",n:"Andere",c:"#d1d5db"}];
 
   return(<div>
+    {/* Datenquellen-Hinweis */}
+    <div style={{fontSize:10.5,color:T.textMuted,marginBottom:12,padding:"6px 10px",background:T.surface2,borderRadius:5,fontFamily:mono}}>
+      Datenquellen: IQVIA LRx (~80% GKV) {"\u00b7"} PharmaScope (Sell-out) {"\u00b7"} CRM/Veeva (Besuchsdaten) {"\u00b7"} Aggregation gem. {"\u00a7"}300 SGB V auf KV-Bezirksebene
+    </div>
+
     <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:18}}>
       <KPI label="Neuverordnungen (NRx) kum." value={fmt(cumNrx)} sub={"Plan: "+fmt(cumNrxP)} trend={dlt(cumNrx,cumNrxP)}/>
       <KPI label="NRx letzter Monat" value={fmt(last?.nrx)} sub={"Plan: "+fmt(last?.nrxP)} trend={prev?dlt(last?.nrx,prev?.nrx):null}/>
-      <KPI label="Unique Verordner" value={fmt(last?.verordner)} sub={"Plan: "+fmt(last?.verordnerP)} trend={dlt(last?.verordner,last?.verordnerP)} alert={last&&last.verordner<last.verordnerP*0.85?"red":null}/>
+      <KPI label="Unique Verordner (LRx)" value={fmt(last?.verordner)} sub={"Plan: "+fmt(last?.verordnerP)} trend={dlt(last?.verordner,last?.verordnerP)} alert={last&&last.verordner<last.verordnerP*0.85?"red":null}/>
       <KPI label="Repeat-Anteil (RRx/TRx)" value={rrxRatio+"%"} sub={isC?"Ziel >75% ab M8":"Ziel >60% ab M4"}/>
     </div>
 
-    {!isC&&<Alert color={T.red}><strong style={{color:T.red}}>{"⚠"} Verordner-Gap:</strong> Nur {last?.verordner} von {last?.verordnerP} geplanten unique Verordnern erreicht ({pct(last?.verordner,last?.verordnerP)}). AMNOG-Ergebnis „geringer Zusatznutzen“ reduziert Bereitschaft zur Erstverordnung. Persistenz mit {last?.persist}% unter Benchmark ({isC?"78":"70"}%).</Alert>}
+    {!isC&&<Alert color={T.red}><strong style={{color:T.red}}>{"\u26a0"} Verordner-Gap:</strong> Nur {last?.verordner} von {last?.verordnerP} geplanten unique Verordnern erreicht ({pct(last?.verordner,last?.verordnerP)}). AMNOG-Ergebnis {"\u201e"}geringer Zusatznutzen{"\u201c"} reduziert Bereitschaft zur Erstverordnung. Persistenz mit {last?.persist}% unter Benchmark ({isC?"78":"70"}%).</Alert>}
 
     <div style={{display:"flex",gap:14,flexWrap:"wrap",marginBottom:14}}>
       <Card title="Verordnungsdynamik: NRx vs. RRx" sub={name+": Neue Patienten vs. Wiederholungsverordnungen (monatlich)"} flex={2}>
@@ -310,7 +315,7 @@ function AdoptionPage({product}){
           </ComposedChart>
         </ResponsiveContainer>
         <div style={{display:"flex",gap:18,marginTop:8,flexWrap:"wrap"}}>
-          {[{l:"NRx (Neuverordnung)",c:pc,d:"Erstrezept für Wirkstoff"},{l:"RRx (Repeat)",c:T.green,d:"Folgeverordnung bestehender Patient"}].map((leg,i)=>(
+          {[{l:"NRx (Neuverordnung)",c:pc,d:"Erstrezept f\u00fcr Wirkstoff"},{l:"RRx (Repeat)",c:T.green,d:"Folgeverordnung bestehender Patient"}].map((leg,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:5,fontSize:11}}>
               <span style={{width:10,height:3,background:leg.c,borderRadius:2,display:"inline-block"}}/>
               <span style={{fontWeight:600,color:T.text}}>{leg.l}</span>
@@ -318,8 +323,8 @@ function AdoptionPage({product}){
             </div>
           ))}
         </div>
-        {isC?<Alert color={T.green}>Gesunde Launch-Dynamik: NRx stabil bei ~420/M, RRx-Aufbau überlinear. Repeat-Anteil {rrxRatio}% zeigt wachsende Patientenbasis mit Therapietreue.</Alert>
-        :<Alert color={T.yellow}>NRx-Zufluss schwankend (Peak Okt durch Launch-Push, Normalisierung ab Nov). RRx-Aufbau unter Erwartung – Persistenz-Problem oder Dosisfindungsabbrecher prüfen.</Alert>}
+        {isC?<Alert color={T.green}>Gesunde Launch-Dynamik: NRx stabil bei ~420/M, RRx-Aufbau {"\u00fc"}berlinear. Repeat-Anteil {rrxRatio}% zeigt wachsende Patientenbasis mit Therapietreue.</Alert>
+        :<Alert color={T.yellow}>NRx-Zufluss schwankend (Peak Okt durch Launch-Push, Normalisierung ab Nov). RRx-Aufbau unter Erwartung {"\u2013"} Persistenz-Problem oder Dosisfindungsabbrecher pr{"\u00fc"}fen.</Alert>}
       </Card>
 
       <Card title="NRx/RRx-Mix Entwicklung" sub="Reifung der Patientenbasis" flex={1}>
@@ -336,11 +341,11 @@ function AdoptionPage({product}){
         <div style={{marginTop:10,padding:10,background:T.surface2,borderRadius:6}}>
           <div style={{fontSize:11,fontWeight:600,color:T.text,marginBottom:4}}>Launch-Reife Indikator</div>
           <div style={{fontSize:11,color:T.textMuted,lineHeight:1.6}}>
-            RRx {"≥"} 70% des TRx-Mix = Patientenbasis trägt sich selbst.{" "}
+            RRx {"\u2265"} 70% des TRx-Mix = Patientenbasis tr{"\u00e4"}gt sich selbst.{" "}
             {name}: RRx-Anteil {rrxRatio}% nach {uptake.length} Monaten.{" "}
             {parseInt(rrxRatio)>=70?<span style={{color:T.green,fontWeight:500}}>Selbsttragende Basis erreicht.</span>
-            :parseInt(rrxRatio)>=50?<span style={{color:T.yellow,fontWeight:500}}>Aufbauphase – Plan-konform.</span>
-            :<span style={{color:T.red,fontWeight:500}}>Frühphase – NRx-Akquise kritisch.</span>}
+            :parseInt(rrxRatio)>=50?<span style={{color:T.yellow,fontWeight:500}}>Aufbauphase {"\u2013"} Plan-konform.</span>
+            :<span style={{color:T.red,fontWeight:500}}>Fr{"\u00fc"}hphase {"\u2013"} NRx-Akquise kritisch.</span>}
           </div>
         </div>
       </Card>
@@ -363,7 +368,7 @@ function AdoptionPage({product}){
         </div>
       </Card>
 
-      <Card title={"Persistenz (MPR ≥80%)"} sub={"Patienten mit ausreichender Therapietreue nach 3 Monaten"} flex={1}>
+      <Card title={"Persistenz (MPR \u226580%)"} sub={"Patienten mit ausreichender Therapietreue nach 3 Monaten"} flex={1}>
         {persistChart.length>0?<ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={persistChart} margin={{top:5,right:10,left:0,bottom:5}}>
             <CartesianGrid strokeDasharray="3 3" stroke={T.grid}/>
@@ -371,12 +376,12 @@ function AdoptionPage({product}){
             <YAxis tick={{fill:T.textMuted,fontSize:11}} unit="%" domain={[50,100]}/>
             <Tooltip content={<Tip/>}/>
             <Line type="monotone" dataKey="benchmark" stroke={T.textDim} strokeDasharray="6 3" strokeWidth={1.5} dot={false} name="Benchmark"/>
-            <Line type="monotone" dataKey="MPR ≥80%" stroke={pc} strokeWidth={2.5} dot={{fill:pc,r:4,stroke:"#fff",strokeWidth:2}} name={"MPR ≥80%"}/>
+            <Line type="monotone" dataKey={"MPR \u226580%"} stroke={pc} strokeWidth={2.5} dot={{fill:pc,r:4,stroke:"#fff",strokeWidth:2}} name={"MPR \u226580%"}/>
           </ComposedChart>
         </ResponsiveContainer>
-        :<div style={{height:220,display:"flex",alignItems:"center",justifyContent:"center",color:T.textMuted,fontSize:13}}>Persistenzdaten verfügbar ab Monat 3 nach Launch</div>}
+        :<div style={{height:220,display:"flex",alignItems:"center",justifyContent:"center",color:T.textMuted,fontSize:13}}>Persistenzdaten verf{"\u00fc"}gbar ab Monat 3 nach Launch</div>}
         <div style={{fontSize:11,color:T.textMuted,marginTop:6}}>
-          MPR (Medication Possession Ratio): Anteil der Patienten, die innerhalb von 90 Tagen nach Erstverordnung {"≥"}80% der erwarteten Folgeverordnungen einlösen.
+          MPR (Medication Possession Ratio): Anteil der Patienten, die innerhalb von 90 Tagen nach Erstverordnung {"\u2265"}80% der erwarteten Folgeverordnungen einl{"\u00f6"}sen.
         </div>
       </Card>
     </div>
@@ -394,8 +399,8 @@ function AdoptionPage({product}){
             ))}
           </AreaChart>
         </ResponsiveContainer>
-        {isC?<Alert color={T.accent2}>Cardiozan-Wachstum geht primär zu Lasten von Forxiga ({"–"}2,6pp) und Invokana ({"–"}2,2pp). Jardiance verteidigt Position ({"–"}1,4pp).</Alert>
-        :<Alert color={T.yellow}>Neurolix gewinnt primär aus dem Venlafaxin/Duloxetin-Pool (Generika-Switch). Spravato wächst parallel – komplementäre Segmente (oral vs. intranasal).</Alert>}
+        {isC?<Alert color={T.accent2}>Cardiozan-Wachstum geht prim{"\u00e4"}r zu Lasten von Forxiga ({"\u2013"}4,5pp) und Jardiance ({"\u2013"}3,3pp). Invokana verliert {"\u2013"}2,7pp {"\u2013"} {"\u00fc"}berproportional zum Ausgangsanteil.</Alert>
+        :<Alert color={T.yellow}>Neurolix gewinnt prim{"\u00e4"}r aus dem Venlafaxin/Duloxetin-Pool (Generika-Switch). Spravato w{"\u00e4"}chst parallel {"\u2013"} komplement{"\u00e4"}re Segmente (oral vs. intranasal).</Alert>}
       </Card>
 
       <Card title={"TRx-Konzentration nach KV-Bezirk"} sub="Verteilung des Volumens nach KV-Bezirk" flex={1}>
@@ -412,21 +417,21 @@ function AdoptionPage({product}){
             <Line yAxisId="right" type="monotone" dataKey="cumTrx" stroke={T.yellow} strokeWidth={2} dot={{fill:T.yellow,r:3}} name="Kumuliert %"/>
           </ComposedChart>
         </ResponsiveContainer>
-        <Alert color={T.yellow}><strong style={{color:T.yellow}}>Konzentrationsrisiko:</strong> Top 5 KV-Bezirke = {conc.length>=2?conc[1].cumTrx:0}% des Volumens. Regionale Verteilung gem. §300 SGB V auf KV-Ebene aggregiert – Einzel-Arzt-Attribution regulatorisch nicht zulässig.</Alert>
+        <Alert color={T.yellow}><strong style={{color:T.yellow}}>Konzentrationsrisiko:</strong> Top 5 KV-Bezirke = {conc.length>=2?conc[1].cumTrx:0}% des Volumens. Regionale Verteilung gem. {"\u00a7"}300 SGB V auf KV-Ebene aggregiert {"\u2013"} Einzel-Arzt-Attribution regulatorisch nicht zul{"\u00e4"}ssig.</Alert>
       </Card>
     </div>
 
-    <Card title={"Methodik & Datengrenzen"} sub="Transparenz über Messbarkeit der Uptake-Metriken im deutschen Markt">
+    <Card title={"Methodik & Datengrenzen"} sub="Transparenz \u00fcber Messbarkeit der Uptake-Metriken im deutschen Markt">
       <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
         {[
-          {icon:"✅",title:"Direkt messbar (Verordnungsdaten)",items:["NRx/RRx (Neuverordnungen vs. Repeats)","Unique Verordner (anonymisiert, kumuliert)","Persistenz / MPR / PDC (Therapietreue)","Marktanteile nach KV-Bezirk","Therapiesequenz & Ko-Medikation"]},
-          {icon:"⚠️",title:"Bedingt messbar (CRM + Korrelation)",items:["AD-Kontaktrate → Verordnung (nur auf Gebietsebene)","Verordner-Profil (Fachgruppe, nicht individuell)","Share of Voice vs. Marktanteil (Korrelation)","Zielärzte-Universum (nur CRM, nicht verifiziert)"]},
-          {icon:"❌",title:"Nicht direkt messbar in DE",items:["Arzt-individuelles Rx-Tracking (regulat. verboten)","Named-Prescriber Marktanteil (≠ USA)","Patient-Arzt-Zuordnung (anonymisiert)","Diagnose-zu-Rx Verknüpfung (keine ICD in Rx-Daten)"]},
+          {icon:"\u2705",title:"Direkt messbar (Verordnungsdaten)",items:["NRx/RRx (Neuverordnungen vs. Repeats)","Unique Verordner (anonymisiert, kumuliert)","Persistenz / MPR / PDC (Therapietreue)","Marktanteile nach KV-Bezirk","Therapiesequenz & Ko-Medikation"]},
+          {icon:"\u26a0\ufe0f",title:"Bedingt messbar (CRM + Korrelation)",items:["AD-Kontaktrate \u2192 Verordnung (nur auf Gebietsebene)","Verordner-Profil (Fachgruppe, nicht individuell)","Share of Voice vs. Marktanteil (Korrelation)","Ziel\u00e4rzte-Universum (nur CRM, nicht verifiziert)"]},
+          {icon:"\u274c",title:"Nicht direkt messbar in DE",items:["Arzt-individuelles Rx-Tracking (regulat. verboten)","Named-Prescriber Marktanteil (\u2260 USA)","Patient-Arzt-Zuordnung (anonymisiert)","Diagnose-zu-Rx Verkn\u00fcpfung (keine ICD in Rx-Daten)"]},
         ].map((col,i)=>(
           <div key={i} style={{flex:1,minWidth:200,background:T.surface2,borderRadius:6,padding:14}}>
             <div style={{fontSize:13,fontWeight:600,color:T.text,marginBottom:8}}>{col.icon} {col.title}</div>
             {col.items.map((item,j)=>(
-              <div key={j} style={{fontSize:11.5,color:T.textMuted,lineHeight:1.7,paddingLeft:4}}>{"•"} {item}</div>
+              <div key={j} style={{fontSize:11.5,color:T.textMuted,lineHeight:1.7,paddingLeft:4}}>{"\u2022"} {item}</div>
             ))}
           </div>
         ))}
@@ -444,7 +449,7 @@ function RegionalPage(){
   const pareto=data.map(d=>{cum+=d.trx;return{...d,cumPct:parseFloat(((cum/tot)*100).toFixed(1))};});
   const scatter=data.map(d=>({name:d.r,x:d.visits,y:parseFloat(d.ms),trx:d.trx}));
   return(<div>
-    <Card title="Regionale Performance – Cardiozan (Jan 2026)" sub="Wo müssen wir den Außendienst umsteuern?" style={{marginBottom:14}}>
+    <Card title="Regionale Performance – Cardiozan (Dez 2025)" sub="Wo müssen wir den Außendienst umsteuern?" style={{marginBottom:14}}>
       <div style={{overflowX:"auto"}}>
         <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
           <thead><tr style={{borderBottom:"2px solid "+T.border}}>
@@ -459,7 +464,7 @@ function RegionalPage(){
             </tr>);})}</tbody>
         </table>
       </div>
-      <Alert color={T.yellow}><strong style={{color:T.yellow}}>Konzentrationsrisiko:</strong> Bayern + Nordrhein + Berlin = 52,5% Volumen bei nur 30% der GKV-Versicherten. Sachsen, SH, Niedersachsen unter 50% Zielerreichung.</Alert>
+      <Alert color={T.yellow}><strong style={{color:T.yellow}}>Konzentrationsrisiko:</strong> Bayern + Nordrhein + Berlin = 52,5% Volumen bei nur 30% der GKV-Versicherten. Sachsen und SH unter 50% Zielerreichung; Niedersachsen und Westfalen-Lippe unter 75%.</Alert>
     </Card>
     <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
       <Card title="TRx-Pareto nach Region" sub="Kumulierte Verteilung" flex={1}>
@@ -487,7 +492,7 @@ function RegionalPage(){
             <Scatter data={scatter} fill={T.cardiozan}>{scatter.map((d,i)=><Cell key={i} fill={T.cardiozan} r={Math.max(5,d.trx/35)}/>)}</Scatter>
           </ScatterChart>
         </ResponsiveContainer>
-        <div style={{fontSize:11,color:T.textMuted,marginTop:6}}>Berlin: hoher MS (8%) bei nur 4 Besuchen {"→"} KOL-Effekt (Charité). SH/HH: viele Besuche, niedriger MS {"→"} Zugangsbarriere?</div>
+        <div style={{fontSize:11,color:T.textMuted,marginTop:6}}>Berlin: hoher MS (20,7%) bei nur 4 Besuchen {"→"} KOL-Effekt (Charité). SH/HH: viele Besuche, niedriger MS {"→"} Zugangsbarriere?</div>
       </Card>
     </div>
   </div>);
@@ -512,9 +517,12 @@ function FinancialPage({product}){
     {name:"Netto/Pack",val:154.47},
   ];
 
+  const planNpt=last?(last.netP/last.trxP):71.14;
+  const actNpt=last?(last.net/last.trx):71.14;
   const bridge=isC?[
     {name:"Net Rev. Plan",val:last?.netP||0},
-    {name:"TRx-Delta",val:-Math.round((last?.trxP-last?.trx)*71.14)},
+    {name:"Volumen-Effekt",val:-Math.round((last?.trxP-last?.trx)*planNpt)},
+    {name:"Preis/Mix",val:Math.round((actNpt-planNpt)*last?.trx)},
     {name:"Net Rev. Ist",val:last?.net||0},
   ]:[
     {name:"Net Rev. Plan",val:last?.netP||0},
@@ -565,7 +573,7 @@ function FinancialPage({product}){
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        {isC?<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>Geringer TRx-Rückstand (-{last?.trxP-last?.trx} TRx) {"→"} Revenue-Abweichung primär volumengetrieben, Preisstruktur stabil.</div>
+        {isC?<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>TRx-Rückstand (-{last?.trxP-last?.trx} TRx) treibt Volumen-Effekt. Preis/Mix-Effekt marginal {"→"} Preisstruktur stabil.</div>
         :<div style={{fontSize:12,color:T.textMuted,marginTop:6}}>Preis-Effekt dominiert Volumen-Effekt {"→"} Preis ist Haupttreiber des Revenue-Gaps.</div>}
       </Card>
     </div>
@@ -587,7 +595,7 @@ function FinancialPage({product}){
           <LineChart data={margin} margin={{top:5,right:10,left:0,bottom:5}}>
             <CartesianGrid strokeDasharray="3 3" stroke={T.grid}/>
             <XAxis dataKey="name" tick={{fill:T.textMuted,fontSize:11}}/>
-            <YAxis tick={{fill:T.textMuted,fontSize:11}} domain={isC?[70,85]:[55,90]} unit="%"/>
+            <YAxis tick={{fill:T.textMuted,fontSize:11}} domain={isC?[77,82]:[55,90]} unit="%"/>
             <Tooltip content={<Tip/>}/>
             <Line type="monotone" dataKey="Ist %" stroke={pc} strokeWidth={2} dot={{fill:pc,r:3,stroke:"#fff",strokeWidth:2}} name="Ist %"/>
             <Line type="monotone" dataKey="Plan %" stroke={T.textDim} strokeDasharray="6 3" strokeWidth={1.5} dot={false} name="Plan %"/>
@@ -624,7 +632,7 @@ function CompetitivePage({product}){
           <AreaChart data={COMPETITORS_CARD} margin={{top:5,right:10,left:0,bottom:5}}>
             <CartesianGrid strokeDasharray="3 3" stroke={T.grid}/>
             <XAxis dataKey="m" tickFormatter={sM} tick={{fill:T.textMuted,fontSize:11}}/>
-            <YAxis tick={{fill:T.textMuted,fontSize:11}} unit="%" domain={[0,50]}/>
+            <YAxis tick={{fill:T.textMuted,fontSize:11}} unit="%" domain={[0,55]}/>
             <Tooltip content={<Tip/>}/>
             <Area type="monotone" dataKey="jardiance" fill={T.jardiance+"22"} stroke={T.jardiance} name="Jardiance"/>
             <Area type="monotone" dataKey="forxiga" fill={T.forxiga+"22"} stroke={T.forxiga} name="Forxiga"/>
@@ -634,7 +642,7 @@ function CompetitivePage({product}){
         </ResponsiveContainer>
       </Card>
       <Card title="Head-to-Head" sub="SGLT2-Inhibitoren in HFrEF" flex={1}>
-        {[{n:"Cardiozan",p:"€3,20",a:"Beträchtl. ZN",rv:"—",c:T.cardiozan},
+        {[{n:"Cardiozan",p:"€2,37",a:"Beträchtl. ZN",rv:"—",c:T.cardiozan},
           {n:"Forxiga",p:"€2,18",a:"Beträchtl. ZN",rv:"AOK ✓",c:T.forxiga},
           {n:"Jardiance",p:"€2,25",a:"Beträchtl. ZN",rv:"—",c:T.jardiance},
           {n:"Invokana",p:"€2,05",a:"Gering. ZN",rv:"—",c:T.invokana},
@@ -643,7 +651,7 @@ function CompetitivePage({product}){
           <div style={{flex:1}}><div style={{fontWeight:600,fontSize:13,color:T.text}}>{comp.n}</div>
           <div style={{color:T.textMuted,fontSize:11.5,marginTop:1}}>DDD: {comp.p} · {comp.a} · RV: {comp.rv}</div></div>
         </div>))}
-        <Alert color={T.yellow}>Cardiozan: höchster DDD-Preis (€3,20 vs. Ø€2,16). Wettbewerbsposition hängt von Rabattvertrag ab.</Alert>
+        <Alert color={T.yellow}>Cardiozan: DDD-Preis €2,37 (leichtes Premium vs. Ø€2,16). Marktzugang über Rabattvertrag entscheidend für Formularlisten-Position.</Alert>
       </Card>
     </div>}
 
@@ -703,27 +711,27 @@ function WhatIfPage({product}){
   ].sort((a,b)=>b.i-a.i);
   const maxI=Math.max(...sens.map(s=>s.i));
 
-  const sliders=[
-    {l:"Marktpenetration",v:pen,set:setPen,min:3,max:30,u:"%",step:1},
-    {l:"Net Price / TRx",v:price,set:setPrice,min:isC?40:80,max:isC?120:220,u:"€",step:1},
-    {l:"Compliance-Rate",v:comp,set:setComp,min:50,max:95,u:"%",step:5},
-    {l:"Marktgröße (TRx/M)",v:mkt,set:setMkt,min:isC?8000:2000,max:isC?25000:10000,u:"",step:1000},
-  ];
+  const SliderRow=({label,value,onChange,min,max,step,unit})=>(
+    <div style={{marginBottom:18}}>
+      <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+        <span style={{fontSize:13,color:T.text}}>{label}</span>
+        <span style={{fontSize:14,fontWeight:700,color:pc,fontFamily:mono}}>{unit==="€"?"€":""}{value.toLocaleString("de-DE")}{unit==="%"?"%":""}</span>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value} onChange={onChange} style={{width:"100%",accentColor:pc,height:5,cursor:"pointer"}}/>
+      <div style={{display:"flex",justifyContent:"space-between",fontSize:10,color:T.textDim}}>
+        <span>{unit==="€"?"€":""}{min.toLocaleString("de-DE")}{unit==="%"?"%":""}</span>
+        <span>{unit==="€"?"€":""}{max.toLocaleString("de-DE")}{unit==="%"?"%":""}</span>
+      </div>
+    </div>
+  );
 
   return(<div>
     <div style={{display:"flex",gap:16,flexWrap:"wrap"}}>
       <Card title="Parameter" sub={(isC?"Cardiozan":"Neurolix")+" – Szenario-Simulation"} flex={1}>
-        {sliders.map((s,i)=>(<div key={i} style={{marginBottom:18}}>
-          <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
-            <span style={{fontSize:13,color:T.text}}>{s.l}</span>
-            <span style={{fontSize:14,fontWeight:700,color:pc,fontFamily:mono}}>{s.u==="€"?"€":""}{s.v.toLocaleString("de-DE")}{s.u==="%"?"%":""}</span>
-          </div>
-          <input type="range" min={s.min} max={s.max} step={s.step} value={s.v} onChange={e=>s.set(Number(e.target.value))} style={{width:"100%",accentColor:pc,height:5,cursor:"pointer"}}/>
-          <div style={{display:"flex",justifyContent:"space-between",fontSize:10,color:T.textDim}}>
-            <span>{s.u==="€"?"€":""}{s.min.toLocaleString("de-DE")}{s.u==="%"?"%":""}</span>
-            <span>{s.u==="€"?"€":""}{s.max.toLocaleString("de-DE")}{s.u==="%"?"%":""}</span>
-          </div>
-        </div>))}
+        <SliderRow label="Marktpenetration" value={pen} onChange={e=>setPen(Number(e.target.value))} min={3} max={30} step={1} unit="%"/>
+        <SliderRow label="Net Price / TRx" value={price} onChange={e=>setPrice(Number(e.target.value))} min={isC?40:80} max={isC?120:220} step={1} unit="€"/>
+        <SliderRow label="Compliance-Rate" value={comp} onChange={e=>setComp(Number(e.target.value))} min={50} max={95} step={1} unit="%"/>
+        <SliderRow label="Marktgröße (TRx/M)" value={mkt} onChange={e=>setMkt(Number(e.target.value))} min={isC?8000:2000} max={isC?25000:10000} step={1000} unit=""/>
       </Card>
       <div style={{flex:1,display:"flex",flexDirection:"column",gap:12}}>
         <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
@@ -750,9 +758,194 @@ function WhatIfPage({product}){
   </div>);
 }
 
+// ============ STORY ============
+
+function StoryPage({product}){
+  const isC=product==="CARD01";
+  const pc=isC?T.cardiozan:T.neurolix;
+  const name=isC?"Cardiozan":"Neurolix";
+
+  const Section=({title,children})=>(
+    <div style={{marginBottom:20}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+        <div style={{width:4,height:22,borderRadius:2,background:pc}}/>
+        <h3 style={{fontSize:15,fontWeight:700,color:T.text,margin:0,fontFamily:sans}}>{title}</h3>
+      </div>
+      <div style={{fontSize:13.5,color:T.text,lineHeight:1.85,paddingLeft:14}}>{children}</div>
+    </div>
+  );
+
+  const Tag=({color,children})=>(
+    <span style={{display:"inline-block",fontSize:10.5,fontWeight:600,padding:"2px 8px",borderRadius:4,background:color+"15",color:color,fontFamily:mono,marginRight:6}}>{children}</span>
+  );
+
+  const Fact=({label,value,color})=>(
+    <div style={{display:"inline-flex",alignItems:"baseline",gap:5,marginRight:18,marginBottom:4}}>
+      <span style={{fontSize:11,color:T.textMuted}}>{label}:</span>
+      <span style={{fontSize:13,fontWeight:700,color:color||T.text,fontFamily:mono}}>{value}</span>
+    </div>
+  );
+
+  return(<div>
+    <Card title={name+" – Launch-Szenario"} sub="Fiktives Produkt · Alle Daten simuliert · Reale Marktmechanismen" style={{marginBottom:16}}>
+      <div style={{display:"flex",gap:12,flexWrap:"wrap",padding:"8px 0 12px",borderBottom:"1px solid "+T.border,marginBottom:16}}>
+        <Tag color={pc}>{isC?"Kardiologie · SGLT2i":"ZNS · Antidepressivum"}</Tag>
+        <Tag color={isC?T.green:T.red}>{isC?"Beträchtlicher Zusatznutzen":"Geringer Zusatznutzen"}</Tag>
+        <Tag color={T.textMuted}>{isC?"Launch: Mai 2025":"Launch: September 2025"}</Tag>
+        <Tag color={isC?T.green:T.yellow}>{isC?"On Track":"Revenue unter Plan"}</Tag>
+      </div>
+
+      {isC ? (<>
+        <Section title="Produkt & Indikation">
+          <strong>Cardiozan</strong> ist ein fiktiver SGLT2-Inhibitor (Sodium-Glucose Co-Transporter 2) zur Behandlung der <strong>Herzinsuffizienz mit reduzierter Ejektionsfraktion (HFrEF)</strong>. Das Produkt tritt in einen etablierten, hochkompetitiven Markt ein, der von Jardiance (Boehringer Ingelheim / Empagliflozin) und Forxiga (AstraZeneca / Dapagliflozin) dominiert wird. Invokana (Janssen / Canagliflozin) spielt eine Nebenrolle.
+          <br/><br/>
+          Die SGLT2i-Klasse ist seit dem ESC-Update November 2025 als First-Line-Therapie bei HFrEF best{"ä"}tigt. Der Gesamtmarkt w{"ä"}chst, was einem Late Entrant wie Cardiozan eine zus{"ä"}tzliche Nachfragequelle neben der reinen Verdr{"ä"}ngung bietet.
+        </Section>
+
+        <Section title="Regulatorischer Verlauf">
+          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
+            <Fact label="EMA-Zulassung" value="20.03.2025" color={T.green}/>
+            <Fact label="G-BA Nutzenbewertung" value="28.09.2025" color={T.green}/>
+            <Fact label="Ergebnis" value={"Beträchtlicher Zusatznutzen"} color={T.green}/>
+          </div>
+          {"Das G-BA-Ergebnis „beträchtlicher Zusatznutzen“ ist das bestmögliche realistische Szenario für einen SGLT2i-Markteintritt. Es ermöglicht eine stabile Preispositionierung während der laufenden "}
+          <strong>Erstattungsbetrag-Verhandlung</strong>{" (geplant: März 2026). Aktuell gilt freie Preisbildung gem. AMNOG-Regelung."}
+          <br/><br/>
+          {"Nächste kritische Meilensteine: Erstattungsbetrag-Verhandlung und angestrebter "}
+          <strong>AOK-Verbund-Rabattvertrag</strong>{" (geplant: Juni 2026). Eine Aufnahme in die DGK-Leitlinien wurde eingereicht."}
+        </Section>
+
+        <Section title={"Kommerzieller Verlauf (Mai 2025 – Dezember 2025)"}>
+          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
+            <Fact label="TRx kumuliert" value="8.235" color={T.text}/>
+            <Fact label="Plan" value="8.421"/>
+            <Fact label="Zielerreichung" value="97,8%" color={T.green}/>
+            <Fact label="Net Revenue kum." value={"€586k"} color={T.text}/>
+          </div>
+          {"Cardiozan zeigt eine "}<strong>modellhafte Launch-Kurve</strong>{": leichter Dip in Monat 2 (typisches Post-Launch-Tal nach dem initialen Sampling-Push), dann kontinuierlicher Aufbau. Der Actual-TRx-Verlauf bewegt sich stabil innerhalb des Forecast-Korridors, leicht unter Base Case aber klar über Downside."}
+          <br/><br/>
+          {"Die Marktanteilsgewinne gehen primär zu Lasten von Forxiga (–4,5pp) und Jardiance (–3,3pp). Invokana verliert –2,7pp – überproportional zu ihrem Ausgangsanteil, konsistent mit deren schwächerem Zusatznutzen-Rating."}
+        </Section>
+
+        <Section title="Preisstruktur">
+          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
+            <Fact label="Listenpreis" value={"€89,50/Pack"}/>
+            <Fact label="Netto/Pack" value={"€71,14"}/>
+            <Fact label="Spread" value="20,5%"/>
+            <Fact label="DDD-Preis" value={"€2,37"}/>
+          </div>
+          {"Der Brutto-Netto-Spread von 20,5% reflektiert die gesetzlichen Abschläge (§130a mit 7%, §130 Apothekenabschlag) ohne zusätzliche Rabattverträge. Der DDD-Preis von €2,37 liegt leicht über dem Wettbewerb (Forxiga: €2,18, Jardiance: €2,25) – ein moderates Premium, das durch den beträchtlichen Zusatznutzen gerechtfertigt ist. Entscheidend für die langfristige Marktposition ist weniger der Preisabstand als der Marktzugang über Rabattverträge und Formularlisten."}
+        </Section>
+
+        <Section title="Regionale Dynamik">
+          {"Bayern und Nordrhein treiben über 44% des Volumens bei nur ca. 30% der GKV-Versicherten. Berlin zeigt einen auffälligen KOL-Effekt: 20,7% regionaler SGLT2i-Marktanteil bei nur 4 AD-Besuchen/Monat und 3 Verordnern (Charité-Netzwerk). Dagegen Schleswig-Holstein und Hamburg: hohe Besuchsfrequenz, niedriger Marktanteil – mögliche Zugangsbarrieren oder falsche Zielgruppenauswahl."}
+        </Section>
+
+        <Section title="Strategische Einordnung">
+          {"Cardiozan repräsentiert den "}<strong>{"„Best Case“-Launch"}</strong>{" im Portfolio: regulatorischer Rückenwind, stabiles Volumenwachstum, beherrschbare Preisproblematik. Die Hauptaufgabe des Portfolio Managers ist hier "}<strong>Skalierung</strong>{" – den Erfolg in die Breite tragen (unterperformende Regionen), den Rabattvertrag vorbereiten und die Leitlinien-Aufnahme als nächsten Wachstumstreiber nutzen."}
+        </Section>
+      </>) : (<>
+        <Section title="Produkt & Indikation">
+          <strong>Neurolix</strong>{" (Wirkstoff: Brivanexin) ist ein fiktives "}<strong>orales Antidepressivum f{"ü"}r therapieresistente Depression (TRD)</strong>{". TRD betrifft ca. 30% der MDD-Patienten und ist ein Segment mit hohem unmet medical need. Der Markt wird dominiert von Generika (Venlafaxin retard, Duloxetin) als Basistherapie und Spravato (Janssen / Esketamin, intranasal) als einzigem patentgeschützten Innovator."}
+          <br/><br/>
+          {"Neurolix positioniert sich als "}<strong>orale Alternative zu Spravato</strong>{" – niedrigere DDD-Kosten (€8,75 vs. €28,50), keine Applikation in Praxis erforderlich, breitere Einsetzbarkeit im ambulanten Setting."}
+        </Section>
+
+        <Section title={"Regulatorischer Verlauf – der Wendepunkt"}>
+          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
+            <Fact label="EMA-Zulassung" value="10.07.2025" color={T.green}/>
+            <Fact label="G-BA Nutzenbewertung" value="20.01.2026" color={T.red}/>
+            <Fact label="Ergebnis" value="Geringer Zusatznutzen" color={T.red}/>
+            <Fact label="Erwartet" value={"Beträchtlich"} color={T.yellow}/>
+          </div>
+          {"Das G-BA-Ergebnis ist der "}<strong>zentrale Bruch im Launch-Szenario</strong>{". Erwartet wurde „beträchtlicher Zusatznutzen“ (analog zu Spravato in dessen Erstbewertung), tatsächlich vergab der G-BA nur „geringen Zusatznutzen“. Die Konsequenz ist ein wesentlich niedrigerer AMNOG-Erstattungsbetrag:"}
+          <br/><br/>
+          <div style={{background:T.red+"08",border:"1px solid "+T.red+"25",borderRadius:6,padding:"10px 14px",margin:"6px 0"}}>
+            <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+              <Fact label="Erwarteter Erstattungsbetrag" value={"€220/Pack"} color={T.textMuted}/>
+              <Fact label={"Tatsächlicher Erstattungsbetrag"} value={"€168/Pack"} color={T.red}/>
+              <Fact label="Net/Pack" value={"€154,47"} color={T.red}/>
+              <Fact label="Delta je TRx" value={"−23,8%"} color={T.red}/>
+            </div>
+          </div>
+          <br/>
+          {"Dies illustriert die "}<strong>{"binäre Natur des AMNOG-Systems"}</strong>{": Die G-BA-Bewertung ist kein Spektrum, sondern ein Stufensprung. Der Unterschied zwischen „beträchtlich“ und „gering“ betrifft nicht nur den Preis, sondern auch die Signalwirkung an Verordner („lohnt sich der Wechsel von Generika?“)."}
+        </Section>
+
+        <Section title={"Kommerzieller Verlauf (Sep 2025 – Dez 2025)"}>
+          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
+            <Fact label="TRx kumuliert" value="1.163" color={T.text}/>
+            <Fact label="Plan" value="1.299"/>
+            <Fact label="Vol.-Erreichung" value="89,5%" color={T.yellow}/>
+            <Fact label="Net Revenue kum." value={"€180k"} color={T.text}/>
+            <Fact label="Rev. Plan" value={"€263k"}/>
+            <Fact label="Rev.-Erreichung" value="68,3%" color={T.red}/>
+          </div>
+          {"Die Volumenseite (89,5%) ist moderat unter Plan – vertretbar für einen Specialty-Launch im ZNS-Segment. Das eigentliche Problem ist die "}<strong>massive Revenue-Abweichung</strong>{": nur 68,3% des Plans, obwohl das Volumen bei fast 90% liegt. Der Preis-Effekt dominiert den Volumen-Effekt – das AMNOG-Ergebnis hat den Revenue pro TRx strukturell um knapp ein Viertel gesenkt."}
+          <br/><br/>
+          {"Gleichzeitig verschlechtert sich die Wettbewerbsposition: Spravato erhielt im Dezember 2025 einen "}<strong>{"beträchtlichen Zusatznutzen"}</strong>{" in einer neuen Indikation (akute Suizidalität bei MDD). Neurolix’ Differenzierung über orale Gabe und niedrigere DDD-Kosten bleibt intakt, aber die Kosten-Nutzen-Argumentation gegenüber einem Wettbewerber mit höherem Evidenzlevel wird schwieriger."}
+        </Section>
+
+        <Section title="Preisstruktur & Revenue Bridge">
+          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
+            <Fact label="Listenpreis" value={"€245/Pack"}/>
+            <Fact label="AMNOG-Abschlag" value={"€77 (31,4%)"} color={T.red}/>
+            <Fact label="Netto/Pack" value={"€154,47"}/>
+            <Fact label="Erwartet" value={"€202,83"}/>
+          </div>
+          {"Der AMNOG-Abschlag von €77/Pack (31,4%) statt erwartet €25/Pack (10,2%) ist der Haupttreiber des Revenue-Gaps. In der Revenue Bridge für Dezember 2025 dominiert der "}<strong>Preis-Effekt den Volumen-Effekt</strong>{" mit Faktor ~2:1. Das verändert die gesamte Unit Economics des Launches."}
+        </Section>
+
+        <Section title="Forecast-Revision & Szenarien">
+          {"Das G-BA-Ergebnis erzwingt eine "}<strong>{"vollständige Forecast-Revision"}</strong>{":"}
+          <div style={{background:T.surface2,borderRadius:6,padding:"10px 14px",margin:"8px 0"}}>
+            <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+              <Fact label="Orig. Break-Even" value="Monat 16"/>
+              <Fact label="Revised Break-Even" value="Monat 21" color={T.red}/>
+              <Fact label="Orig. NPV (12M)" value={"€2,22M"}/>
+              <Fact label="Revised NPV (12M)" value={"€1,69M"} color={T.red}/>
+              <Fact label="NPV-Delta" value={"−24%"} color={T.red}/>
+            </div>
+          </div>
+        </Section>
+
+        <Section title="Strategische Einordnung">
+          {"Neurolix repräsentiert den "}<strong>{"„AMNOG-Schock“-Launch"}</strong>{" im Portfolio – den Moment, in dem ein einziges regulatorisches Event die gesamte kommerzielle Kalkulation kippt. Die Aufgabe des Portfolio Managers ist hier fundamental anders als bei Cardiozan: nicht Skalierung, sondern "}<strong>Schadensbegrenzung und Pivot</strong>.
+          <br/><br/>
+          {"Konkret: RWE-Studie (Real World Evidence) zur Unterstützung einer Neubewertung, Medical Affairs Advisory Board zur Verordner-Sicherung, Prüfung ob Persistenz-Programme den Revenue pro Patient kompensieren können. Der Rabattvertrag (vdek, geplant September 2026) muss völlig neu kalkuliert werden."}
+        </Section>
+      </>)}
+    </Card>
+
+    <Card title="Warum dieses Dual-Szenario?" sub="Design-Rationale des Work Samples">
+      <div style={{fontSize:13.5,color:T.text,lineHeight:1.85,padding:"4px 0"}}>
+        {"Ein Strategic Portfolio Manager bei Viatris muss "}<strong>beide Situationen gleichzeitig</strong>{" managen können: den Gewinner skalieren und den Problemfall retten. Dieses Dashboard bildet deshalb bewusst zwei kontrastierende Launch-Szenarien ab:"}
+        <div style={{display:"flex",gap:14,marginTop:14,flexWrap:"wrap"}}>
+          <div style={{flex:1,minWidth:250,background:T.cardiozan+"08",border:"1px solid "+T.cardiozan+"22",borderRadius:8,padding:14}}>
+            <div style={{fontWeight:700,color:T.cardiozan,marginBottom:6}}>Cardiozan = Skalierungsaufgabe</div>
+            <div style={{fontSize:12.5,color:T.textMuted,lineHeight:1.7}}>
+              {"Regulatorischer Rückenwind nutzen, unterperformende Regionen aktivieren, Rabattvertrag vorbereiten, Leitlinien-Aufnahme als Wachstumshebel. Typische Fragen: „Wie holen wir Sachsen und SH auf Bayern-Niveau?“"}
+            </div>
+          </div>
+          <div style={{flex:1,minWidth:250,background:T.neurolix+"08",border:"1px solid "+T.neurolix+"22",borderRadius:8,padding:14}}>
+            <div style={{fontWeight:700,color:T.neurolix,marginBottom:6}}>Neurolix = Krisenmanagement</div>
+            <div style={{fontSize:12.5,color:T.textMuted,lineHeight:1.7}}>
+              {"AMNOG-Schock absorbieren, Forecast revidieren, RWE-Strategie für Neubewertung, Verordner trotz schlechtem G-BA-Signal halten. Typische Fragen: „Erreichen wir Break-Even überhaupt noch in 24 Monaten?“"}
+            </div>
+          </div>
+        </div>
+        <div style={{marginTop:14,fontSize:12.5,color:T.textMuted}}>
+          {"Die Märkte (Kardiologie/SGLT2i und ZNS/TRD) wurden gewählt, weil sie strukturell unterschiedlich funktionieren: Kardio ist Massenmarkt mit Leitlinien-getriebener Verordnung und Rabattvertragsdominanz. ZNS ist Specialty mit hoher Arzt-Abhängigkeit, individueller Therapieentscheidung und geringerem Generika-Druck auf den Innovator. Beide sind für Viatris’ Transformation vom „Generic Giant“ zur „Specialty Powerhouse“ strategisch relevant."}
+        </div>
+      </div>
+    </Card>
+  </div>);
+}
+
 // ============ MAIN ============
 
 const PAGES=[
+  {id:"story",label:"Szenario-Story",icon:"📖"},
   {id:"exec",label:"Executive Summary",icon:"📊"},
   {id:"adoption",label:"Markt-Uptake & Verordner",icon:"📈"},
   {id:"regional",label:"Regionale Performance",icon:"🗺"},
@@ -762,7 +955,7 @@ const PAGES=[
 ];
 
 export default function App(){
-  const [page,setPage]=useState("exec");
+  const [page,setPage]=useState("story");
   const [product,setProduct]=useState("CARD01");
   const pc=product==="CARD01"?T.cardiozan:T.neurolix;
 
@@ -770,7 +963,7 @@ export default function App(){
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
     <div style={{background:T.surface,borderBottom:"1px solid "+T.border,padding:"10px 24px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10}}>
       <div>
-        <h1 style={{fontSize:17,fontWeight:700,margin:0,color:T.text,letterSpacing:-.3}}>Launch Tracking Dashboard</h1>
+        <h1 style={{fontSize:17,fontWeight:700,margin:0,color:T.text,letterSpacing:-.3}}>Launch Tracking Dashboard – Prototyp Demo</h1>
         <p style={{fontSize:11,color:T.textMuted,margin:0}}>Portfolio Launch Analytics · Stand: Januar 2026</p>
       </div>
       <div style={{display:"flex",gap:3,background:T.surface2,borderRadius:7,padding:3}}>
@@ -793,12 +986,13 @@ export default function App(){
       ))}
     </div>
     <div style={{padding:"16px 24px",maxWidth:1200,margin:"0 auto"}}>
+      {page==="story"&&<StoryPage product={product}/>}
       {page==="exec"&&<ExecSummary product={product}/>}
       {page==="adoption"&&<AdoptionPage product={product}/>}
       {page==="regional"&&<RegionalPage/>}
       {page==="financial"&&<FinancialPage product={product}/>}
       {page==="competitive"&&<CompetitivePage product={product}/>}
-      {page==="whatif"&&<WhatIfPage product={product}/>}
+      {page==="whatif"&&<WhatIfPage key={product} product={product}/>}
     </div>
     <div style={{padding:"14px 24px",textAlign:"center",fontSize:10.5,color:T.textDim,borderTop:"1px solid "+T.border}}>
       Fiktive Daten – Work Sample für Strategic Portfolio Manager Position · Lesemann Consulting © 2026
