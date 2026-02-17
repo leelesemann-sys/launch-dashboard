@@ -1,56 +1,74 @@
-# Launch Tracking Dashboard – Prototyp Demo
+# Launch Tracking Dashboard
 
-Pharma Launch Analytics Dashboard mit 7 Tabs: Szenario-Story, Executive Summary, Markt-Uptake & Verordner, Regionale Performance, Financial Deep Dive, Wettbewerb, Szenario-Engine.
+Interactive Pharma Launch Analytics Dashboard with 6 tabs: Executive Summary, Market Uptake & Prescribers, Regional Performance, Financial Deep Dive, Competition, and Scenario Engine.
 
-Fiktive Daten – Work Sample für Strategic Portfolio Manager Position · Lesemann Consulting © 2026
+Built as a work sample for a Strategic Portfolio Manager position.
 
-## Lokal starten
+> All data is fictitious and for demonstration purposes only.
+
+![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+## Features
+
+- **Executive Summary** — KPIs, TRx forecast corridor, milestones, net revenue vs. plan
+- **Market Uptake & Prescribers** — NRx/RRx dynamics, unique prescribers, persistence (MPR), market shares
+- **Regional Performance** — KV region table, Pareto analysis, field force vs. market share scatter
+- **Financial Deep Dive** — Price waterfall, revenue bridge, gross-to-net, scenario comparison
+- **Competition** — Market share trends, head-to-head, competitor event timeline
+- **Scenario Engine** — Interactive what-if simulation with sensitivity analysis
+
+Two product tracks: **Cardiozan** (cardiology) and **Neurolix** (CNS/TRD).
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
+Open `http://localhost:5173` in your browser.
+
 ## Deployment
 
-### Option A: Vercel (empfohlen – einfachster Weg)
+### Vercel (recommended)
 
-1. Repo auf GitHub pushen
-2. [vercel.com](https://vercel.com) → "Import Project" → GitHub-Repo auswählen
-3. Framework: **Vite** (wird auto-erkannt)
-4. Deploy klicken – fertig
+1. Push repo to GitHub
+2. [vercel.com](https://vercel.com) → Import Project → select GitHub repo
+3. Framework: **Vite** (auto-detected)
+4. Deploy
 
-Ergebnis: `https://launch-dashboard.vercel.app` (oder Custom Domain)
+### GitHub Pages (automatic via GitHub Actions)
 
-### Option B: GitHub Pages (automatisch via GitHub Actions)
-
-1. Repo auf GitHub pushen
+1. Push repo to GitHub
 2. Settings → Pages → Source: **GitHub Actions**
-3. Bei jedem Push auf `main` wird automatisch deployed
+3. Deploys automatically on every push to `main`
 
-**Wichtig:** In `vite.config.js` den `base`-Pfad an deinen Repo-Namen anpassen:
+**Note:** The `base` path in `vite.config.js` must match your repo name:
 ```js
-// Wenn dein Repo "launch-dashboard" heißt:
-base: '/launch-dashboard/'
-
-// Wenn dein Repo anders heißt, z.B. "my-dashboard":
-base: '/my-dashboard/'
+base: isGitHubPages ? '/launch-dashboard/' : '/'
 ```
 
-Ergebnis: `https://<username>.github.io/launch-dashboard/`
-
-### Option C: Manuelles Deployment (beliebiger Static Host)
+### Manual Build
 
 ```bash
-npm run build          # für Vercel/Netlify/eigener Server
-# oder
-npm run build:ghpages  # für GitHub Pages (mit base-Pfad)
+npm run build          # for Vercel/Netlify/any static host
+npm run build:ghpages  # for GitHub Pages (with base path)
 ```
 
-Den Inhalt von `dist/` auf einen beliebigen Static Hosting Service hochladen.
+Upload the contents of `dist/` to any static hosting service.
 
 ## Tech Stack
 
 - React 18 + Vite 5
-- Recharts (Charts)
-- Kein CSS-Framework – Inline Styles
+- Recharts (charts)
+- No CSS framework — inline styles
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+Lesemann Consulting © 2026
