@@ -82,7 +82,7 @@ const COMP_EVENTS = [
   {date:"Jan 2026",area:"ZNS",type:"Pipeline",who:"Relmada / REL-1017",desc:"Phase III positiv, EMA-Zulassung erwartet 2027"},
 ];
 
-// ============ MARKET UPTAKE DATA (Datenquellen: IQVIA LRx / PharmaScope / CRM) ============
+// ============ MARKET UPTAKE DATA ============
 
 // NRx = Neuverordnungen (neue Patienten), RRx = Wiederholungsverordnungen, TRx = Gesamt
 // Verordner = unique anonymisierte Verordner-IDs (LRx, ~80% GKV-Abdeckung, hochgerechnet)
@@ -286,11 +286,6 @@ function AdoptionPage({product}){
     :[{k:"spravato",n:"Spravato",c:"#64748b"},{k:"venlafaxin",n:"Venlafaxin",c:"#94a3b8"},{k:"duloxetin",n:"Duloxetin",c:"#a1a1aa"},{k:"neurolix",n:"Neurolix",c:T.neurolix},{k:"andere",n:"Andere",c:"#d1d5db"}];
 
   return(<div>
-    {/* Datenquellen-Hinweis */}
-    <div style={{fontSize:10.5,color:T.textMuted,marginBottom:12,padding:"6px 10px",background:T.surface2,borderRadius:5,fontFamily:mono}}>
-      Datenquellen: IQVIA LRx (~80% GKV) {"\u00b7"} PharmaScope (Sell-out) {"\u00b7"} CRM/Veeva (Besuchsdaten) {"\u00b7"} Aggregation gem. {"\u00a7"}300 SGB V auf KV-Bezirksebene
-    </div>
-
     <div style={{display:"flex",gap:10,flexWrap:"wrap",marginBottom:18}}>
       <KPI label="Neuverordnungen (NRx) kum." value={fmt(cumNrx)} sub={"Plan: "+fmt(cumNrxP)} trend={dlt(cumNrx,cumNrxP)}/>
       <KPI label="NRx letzter Monat" value={fmt(last?.nrx)} sub={"Plan: "+fmt(last?.nrxP)} trend={prev?dlt(last?.nrx,prev?.nrx):null}/>
