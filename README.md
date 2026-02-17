@@ -2,6 +2,8 @@
 
 Interactive Pharma Launch Analytics Dashboard with 6 tabs: Executive Summary, Market Uptake & Prescribers, Regional Performance, Financial Deep Dive, Competition, and Scenario Engine.
 
+**Live Demo:** [launch-dashboard-beta.vercel.app](https://launch-dashboard-beta.vercel.app)
+
 > All data is fictitious and for demonstration purposes only.
 
 ![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)
