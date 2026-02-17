@@ -1,8 +1,6 @@
-# Launch Tracking Dashboard
+# Pharma Launch Tracking Dashboard
 
 Interactive Pharma Launch Analytics Dashboard with 6 tabs: Executive Summary, Market Uptake & Prescribers, Regional Performance, Financial Deep Dive, Competition, and Scenario Engine.
-
-Built as a work sample for a Strategic Portfolio Manager position.
 
 > All data is fictitious and for demonstration purposes only.
 
