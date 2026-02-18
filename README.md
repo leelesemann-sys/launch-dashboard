@@ -1,5 +1,7 @@
 # Pharma Launch Tracking Dashboard
 
+> **Language:** English | [Deutsch](README.de.md)
+
 Interactive Pharma Launch Analytics Dashboard with 6 tabs: Executive Summary, Market Uptake & Prescribers, Regional Performance, Financial Deep Dive, Competition, and Scenario Engine.
 
 **Live Demo:** [launch-dashboard-beta.vercel.app](https://launch-dashboard-beta.vercel.app)
